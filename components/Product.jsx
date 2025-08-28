@@ -22,7 +22,7 @@ const Product = () => {
     console.log("Form data being sent:", form);
 
     try {
-      await axios.post("http://localhost:8081/products/add", form);
+      await axios.post("https://jwt-backend-xbd6.onrender.com/products/add", form);
       alert("✅ Product added successfully!");
       navigate("/ProductList");
     } catch (err) {

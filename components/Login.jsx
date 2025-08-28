@@ -19,7 +19,7 @@ function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:8081/auth/login", form);
+      const res = await axios.post("https://jwt-backend-xbd6.onrender.com/auth/login", form);
       localStorage.setItem("token", res.data.token);
       navigate("/Product");
     } catch (err) {

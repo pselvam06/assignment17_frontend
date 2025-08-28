@@ -23,7 +23,7 @@ const Register = () => {
     e.preventDefault();
     console.log("Form data being sent:", form);
     try {
-      await axios.post("http://localhost:8081/auth/register", form);
+      await axios.post("https://jwt-backend-xbd6.onrender.com/auth/register", form);
       navigate("/login");
     } catch (err) {
       console.error(err);
