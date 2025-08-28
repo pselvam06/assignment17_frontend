@@ -1,0 +1,37 @@
+/* Full background image */
+.login-page {
+  background: url("https://images.unsplash.com/photo-1508780709619-79562169bc64")
+    no-repeat center center/cover;
+  position: relative;
+  min-height: 100vh;
+}
+
+
+
+/* Reduce card padding */
+.register-card {
+  background: rgba(255, 255, 255, 0.95);
+  position: relative;
+  z-index: 1;
+  border-radius: 0.8rem ;
+  padding: 1.5rem ;   /* reduced padding */
+}
+
+
+
+/* Reduce margins */
+.register-card .mb-3 {
+  margin-bottom: 0.8rem !important;
+}
+
+/* Button smaller */
+.btn-success {
+  padding: 0.5rem;
+  font-size: 1rem;
+}
+
+
+/* Button hover */
+.btn-primary:hover {
+  background-color: #0056b3;
+}
