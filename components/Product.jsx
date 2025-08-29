@@ -18,36 +18,34 @@ const Product = () => {
   };
 
   const handleAddProduct = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    const token = localStorage.getItem("token");
-    console.log("Token being sent:", token); // ✅ Debug
-    console.log("Form data being sent:", form);
+  const token = localStorage.getItem("token");
+  console.log("Token from localStorage:", token); // 👈 check this
 
-    if (!token) {
-      alert("No token found. Please login again.");
-      navigate("/login");
+  if (!token) {
+    alert("No token found. Please login again.");
       return;
-    }
+  }
 
-    try {
-      await axios.post(
-        "https://jwt-backend-xbd6.onrender.com/products/add",
-        form,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`, // 👈 most common format
-          },
-        }
-      );
+  try {
+    await axios.post(
+      "https://jwt-backend-xbd6.onrender.com/products/add",
+      form,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,  // 👈 try with Bearer
+        },
+      }
+    );
 
-      navigate("/Product");
-    } catch (err) {
-      console.error("Error adding product:", err.response?.data || err.message);
-      alert(err.response?.data?.message || "Failed to add product");
-    }
-  };
+    navigate("/ProductList");
+  } catch (err) {
+    console.error("Error adding product:", err.response?.data || err.message);
+  }
+};
+
 
   return (
     <div
