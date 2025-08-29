@@ -19,8 +19,8 @@ function Home() {
           <Link to="/login" className="btn btn-success btn-lg me-3">
             Go to Login
           </Link>
-          <Link to="/product" className="btn btn-primary btn-lg">
-            View Products
+          <Link to="/register" className="btn btn-primary btn-lg">
+            Register
           </Link>
         </div>
       </div>

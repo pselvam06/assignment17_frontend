@@ -19,14 +19,33 @@ const Product = () => {
 
   const handleAddProduct = async (e) => {
     e.preventDefault();
+
+    const token = localStorage.getItem("token");
+    console.log("Token being sent:", token); // ✅ Debug
     console.log("Form data being sent:", form);
 
+    if (!token) {
+      alert("No token found. Please login again.");
+      navigate("/login");
+      return;
+    }
+
     try {
-      await axios.post("https://jwt-backend-xbd6.onrender.com/products/add", form);
-      alert("✅ Product added successfully!");
-      navigate("/ProductList");
+      await axios.post(
+        "https://jwt-backend-xbd6.onrender.com/products/add",
+        form,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`, // 👈 most common format
+          },
+        }
+      );
+
+      navigate("/Product");
     } catch (err) {
-      console.error(err);
+      console.error("Error adding product:", err.response?.data || err.message);
+      alert(err.response?.data?.message || "Failed to add product");
     }
   };
 
