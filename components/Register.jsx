@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import "./Register.css"; // custom css
 
@@ -10,7 +10,7 @@ const Register = () => {
     email: "",
     password: "",
     role: "Buyer", // default
-    mobilenumber: ""
+    mobilenumber: "",
   });
 
   const navigate = useNavigate();
@@ -23,7 +23,7 @@ const Register = () => {
     e.preventDefault();
     console.log("Form data being sent:", form);
     try {
-      await axios.post("https://jwt-backend-xbd6.onrender.com/auth/register", form);  
+      await axios.post("https://jwt-backend-xbd6.onrender.com/auth/register", form);
       navigate("/login");
     } catch (err) {
       console.error(err);
@@ -32,11 +32,10 @@ const Register = () => {
   };
 
   return (
-    <div className="register-page">
-      <div className="overlay"></div>
-      <div className="container d-flex justify-content-center align-items-center min-vh-50">
-        <div className="row w-100">
-          <div className="col-md-6 offset-md-3">
+    <div className="register-page d-flex justify-content-center align-items-center min-vh-100">
+      <div className="container">
+        <div className="row justify-content-center">
+          <div className="col-lg-5 col-md-7 col-sm-10">
             <div className="card shadow-lg rounded-4 border-0 p-4 register-card">
               <div className="card-body">
                 <h2 className="text-center mb-4 fw-bold text-success">Register</h2>
@@ -50,7 +49,7 @@ const Register = () => {
                     <input
                       type="text"
                       id="formName"
-                      className="form-control "
+                      className="form-control"
                       name="username"
                       placeholder="Enter your name"
                       value={form.username}
@@ -68,7 +67,7 @@ const Register = () => {
                       type="email"
                       id="formEmail"
                       name="email"
-                      className="form-control "
+                      className="form-control"
                       placeholder="Enter your email"
                       value={form.email}
                       onChange={handleChange}
@@ -85,7 +84,7 @@ const Register = () => {
                       type="password"
                       id="formPassword"
                       name="password"
-                      className="form-control "
+                      className="form-control"
                       placeholder="Enter a password"
                       value={form.password}
                       onChange={handleChange}
@@ -101,7 +100,7 @@ const Register = () => {
                     <select
                       id="formRole"
                       name="role"
-                      className="form-select "
+                      className="form-select"
                       value={form.role}
                       onChange={handleChange}
                     >
@@ -120,7 +119,7 @@ const Register = () => {
                       type="text"
                       id="mobilenumber"
                       name="mobilenumber"
-                      className="form-control "
+                      className="form-control"
                       placeholder="Enter mobile number"
                       value={form.mobilenumber}
                       onChange={handleChange}
@@ -128,23 +127,23 @@ const Register = () => {
                     />
                   </div>
 
-                  <button type="submit" className="btn btn-success btn-lg w-100">
+                  <button type="submit" className="btn btn-success btn-lg w-100 mt-3">
                     Register
                   </button>
                 </form>
 
                 <div className="text-center mt-4">
-                  <p className="mb-1">
+                  <p>
                     Already have an account?{" "}
-                    <a href="/login" className="text-decoration-none fw-bold">
-                      Login here
-                    </a>
+                    <Link to="/login" className="text-success fw-semibold">
+                      Go to Login
+                    </Link>
                   </p>
                   <p>
                     Back to{" "}
-                    <a href="/" className="text-decoration-none fw-bold">
+                    <Link to="/" className="text-success fw-semibold">
                       Home
-                    </a>
+                    </Link>
                   </p>
                 </div>
               </div>
