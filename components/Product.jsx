@@ -18,41 +18,42 @@ const Product = () => {
   };
 
   const handleAddProduct = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  const token = localStorage.getItem("token");
-  console.log("Token from localStorage:", token); // 👈 check this
+    const token = localStorage.getItem("token");
 
-  if (!token) {
-    alert("No token found. Please login again.");
-      return;
-  }
-
-  try {
-    await axios.post(
-      "https://jwt-backend-xbd6.onrender.com/products/add",
-      form,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,  // 👈 try with Bearer
+    axios
+      .post(
+        "https://jwt-backend-xbd6.onrender.com/products/add",
+        {
+          title: form.title,
+          price: form.price,
+          description: form.description,
+          rating: form.rating,
         },
-      }
-    );
-
-    navigate("/ProductList");
-  } catch (err) {
-    console.error("Error adding product:", err.response?.data || err.message);
-  }
-};
-
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // ✅ token must be sent
+          },
+        }
+      )
+      .then((res) => {
+        console.log("Product added:", res.data);
+      })
+      .catch((err) => {
+        console.error(
+          "Error adding product:",
+          err.response?.data || err.message
+        );
+      });
+  };
 
   return (
     <div
       className=" d-flex align-items-center"
       style={{
-        minHeight: "100vh",   // full height
-    width: "100%",  
+        minHeight: "100vh", // full height
+        width: "100%",
         backgroundImage:
           "url('https://images.pexels.com/photos/5702207/pexels-photo-5702207.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=1200')", // Modern ecommerce bg
         backgroundSize: "cover",
@@ -77,9 +78,7 @@ const Product = () => {
       <div className="container position-relative" style={{ zIndex: 2 }}>
         <div className="row justify-content-center align-items-center">
           {/* Left Section (Illustration) */}
-          <div className="col-lg-6 d-none d-lg-flex justify-content-center">
-         
-          </div>
+          <div className="col-lg-6 d-none d-lg-flex justify-content-center"></div>
 
           {/* Right Section (Form) */}
           <div className="col-lg-5 col-md-8">
@@ -96,7 +95,10 @@ const Product = () => {
                 <form onSubmit={handleAddProduct}>
                   {/* Product Name */}
                   <div className="mb-3">
-                    <label htmlFor="productName" className="form-label fw-semibold">
+                    <label
+                      htmlFor="productName"
+                      className="form-label fw-semibold"
+                    >
                       Product Name
                     </label>
                     <input
@@ -131,7 +133,10 @@ const Product = () => {
 
                   {/* Description */}
                   <div className="mb-3">
-                    <label htmlFor="productDescription" className="form-label fw-semibold">
+                    <label
+                      htmlFor="productDescription"
+                      className="form-label fw-semibold"
+                    >
                       Description
                     </label>
                     <textarea
